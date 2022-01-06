@@ -1,0 +1,8 @@
+{
+  "name": "ARBS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "bebed04f"
+}
