@@ -5,10 +5,10 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 
 // Pages
-import { TabsPage } from './tabs.page';
+import { Tab2Page } from './tab2.page';
 
 // Routing
-import { TabsPageRoutingModule } from './tabs-routing.module';
+import { Tab2PageRoutingModule } from './tab2-routing.module';
 
 @NgModule({
   imports: [
@@ -18,11 +18,11 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
     IonicModule,
 
     // Routing
-    TabsPageRoutingModule
+    Tab2PageRoutingModule,
   ],
   declarations: [
     // Pages
-    TabsPage
+    Tab2Page
   ]
 })
-export class TabsPageModule {}
+export class Tab2PageModule {}

@@ -29,10 +29,16 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "src/assets/icon/custom-ion-icons",
+                "output": "./svg"
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": [],
+            "allowedCommonJsDependencies": ["xml2js"],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,
