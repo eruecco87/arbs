@@ -9,11 +9,15 @@ const routes: Routes = [
   {
     path: 'roster-details',
     loadChildren: () => import('./pages/roster-details/roster-details.module').then( m => m.RosterDetailsPageModule)
+  },
+  {
+    path: 'roster-force',
+    loadChildren: () => import('./pages/roster-force/roster-force.module').then( m => m.RosterForcePageModule)
   }
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, initialNavigation: 'disabled' })
   ],
   exports: [RouterModule]
 })

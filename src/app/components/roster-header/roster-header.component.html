@@ -1,0 +1,41 @@
+<div class="ion-padding-horizontal ion-overflow-hidden">
+
+  <ion-text [color]="'danger'" class="ion-float-left">
+
+    <small class="ion-text-bold ion-text-uppercase">limits | </small>
+    <small><span *ngFor="let limit of roster.costLimits"><strong>{{ limit.name }}</strong>: {{ limit.value | number }}</span></small>
+
+  </ion-text>
+
+  <ion-text [color]="'medium'" class="ion-float-right">
+
+    <small class="ion-text-bold ion-text-uppercase">BS Version: {{ roster.bsVersion }} </small>
+
+  </ion-text>
+
+</div>
+
+<ion-card [color]="'primary'">
+
+  <ion-card-header>
+
+    <ion-grid>
+
+      <ion-row>
+
+        <ion-col *ngFor="let cost of roster.costs" class="ion-text-center">
+
+          <ion-text><h4 class="ion-no-margin ion-text-bold">{{ cost.value | number }}</h4></ion-text>
+          <ion-text [color]="'light'"><small class="ion-no-margin">{{ cost.name }}</small></ion-text>
+
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+    <ion-card-subtitle class="ion-text-center">{{ roster.system }}</ion-card-subtitle>
+
+  </ion-card-header>
+
+</ion-card>

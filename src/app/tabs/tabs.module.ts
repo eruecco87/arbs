@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 // Ionic
 import { IonicModule } from '@ionic/angular';
 
+// Modules
+import { ComponentsModule } from '@components';
+
 // Pages
 import { TabsPage } from './tabs.page';
 
@@ -16,6 +19,9 @@ import { TabsPageRoutingModule } from './tabs-routing.module';
 
     // Ionic
     IonicModule,
+
+    // Modules
+    ComponentsModule,
 
     // Routing
     TabsPageRoutingModule

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 // Ionic
 import { IonicModule } from '@ionic/angular';
@@ -9,28 +8,25 @@ import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from '@components';
 
 // Pages
-import { Tab1Page } from './tab1.page';
+import { RosterForcePage } from './roster-force.page';
 
 // Routing
-import { Tab1PageRoutingModule } from './tab1-routing.module';
+import { RosterForcePageRoutingModule } from './roster-force-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
-
-    // Ionic
     IonicModule,
 
-    // Componetns
+    // Components
     ComponentsModule,
 
     // Routing
-    Tab1PageRoutingModule,
+    RosterForcePageRoutingModule
   ],
   declarations: [
     // Pages
-    Tab1Page
+    RosterForcePage
   ]
 })
-export class Tab1PageModule {}
+export class RosterForcePageModule {}

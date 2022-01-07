@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 // Ionic
 import { IonicModule } from '@ionic/angular';
 
+// Modules
+import { ComponentsModule } from '@components';
+
 // Pages
 import { RosterDetailsPage } from './roster-details.page';
 
@@ -14,8 +17,16 @@ import { RosterDetailsPageRoutingModule } from './roster-details-routing.module'
   imports: [
     CommonModule,
     IonicModule,
+
+    // Components
+    ComponentsModule,
+
+    // Routing
     RosterDetailsPageRoutingModule
   ],
-  declarations: [RosterDetailsPage]
+  declarations: [
+    // Pages
+    RosterDetailsPage
+  ]
 })
 export class RosterDetailsPageModule {}

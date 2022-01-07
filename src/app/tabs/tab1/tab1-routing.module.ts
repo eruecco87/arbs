@@ -9,8 +9,11 @@ const routes: Routes = [
     path: '',
     component: Tab1Page,
   }, {
-    path: ':id',
-    loadChildren: () => import('../../pages/roster-details/roster-details.module').then(m => m.RosterDetailsPageModule)
+    path: 'roster/:id',
+    loadChildren: () => import('@pages').then(m => m.RosterDetailsPageModule)
+  }, {
+    path: 'force',
+    loadChildren: () => import('@pages').then(m => m.RosterForcePageModule)
   }
 ];
 

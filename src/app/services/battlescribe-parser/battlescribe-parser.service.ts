@@ -71,6 +71,7 @@ export class BattlescribeParserService {
     return forces.map((force: any) => ({
       name: force.NAME,
       catalogueName: force.CATALOGUENAME,
+      catalogueRevision: force.CATALOGUEREVISION,
       categories: force.CATEGORIES ? this.mapForcesCategories(force.CATEGORIES[0].CATEGORY) : [],
       rules: force.RULES ? this.mapForcesRules(force.RULES[0].RULE) : [],
       selections: force.SELECTIONS ? this.mapForcesSelections(force.SELECTIONS[0].SELECTION) : []
@@ -170,6 +171,7 @@ export class BattlescribeParserService {
 
         } else {
 
+          console.log('SELECTED ROSTER | ', result);
           SUBJECT.next(this.mapRoster(this.flattenDollarSignProperties(result.ROSTER)));
           SUBJECT.complete();
 

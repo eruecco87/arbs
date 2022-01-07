@@ -3,11 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 // Ionic
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule, IonicRouteStrategy, NavController } from '@ionic/angular';
 import { IonicStorageModule, Storage } from '@ionic/storage-angular';
 
+// Modules
+import { ComponentsModule } from '@components';
+
 // Services
-import { BattlescribeParserService, RosterService } from '@services';
+import { BattlescribeParserService, RosterService, SelectionService } from '@services';
 
 // Components
 import { AppComponent } from './app.component';
@@ -25,7 +28,10 @@ import { AppRoutingModule } from './app-routing.module';
 
     // Ionic
     IonicModule.forRoot({ mode: 'md' }),
-    IonicStorageModule.forRoot({ name: 'arbs'}),
+    IonicStorageModule.forRoot({ name: 'arbs' }),
+
+    // Modules
+    ComponentsModule,
 
     // Routing
     AppRoutingModule
@@ -36,7 +42,8 @@ import { AppRoutingModule } from './app-routing.module';
 
     // Services
     BattlescribeParserService,
-    RosterService
+    RosterService,
+    SelectionService
   ],
   bootstrap: [
     AppComponent
@@ -48,12 +55,17 @@ export class AppModule {
    * AppModule Constructor
    *
    * @param storage
+   * @param navController
    */
   constructor(
-    private storage: Storage
+    private storage: Storage,
+    private navController: NavController
   ) {
 
     this.initStorage();
+
+    // Force navigation to the home page on app load.
+    this.navController.navigateRoot('/');
 
   }
 

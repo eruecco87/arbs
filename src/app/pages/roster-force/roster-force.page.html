@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-toolbar>
+
+    <ion-buttons [slot]="'start'">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ force?.name }}</ion-title>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ng-container *ngIf="force; else loadingForce">
+
+    <app-force-header [force]="force"></app-force-header>
+
+  </ng-container>
+
+</ion-content>
+
+<ng-template #loadingForce>
+
+  <app-loader></app-loader>
+
+</ng-template>

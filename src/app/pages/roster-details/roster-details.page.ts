@@ -3,13 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 
 // RXJS
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 
 // Ionic
-import { LoadingController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 // Interfaces
-import { RosterInterface } from '@interfaces';
+import { RosterInterface, RosterForceInterface } from '@interfaces';
 
 // Services
 import { RosterService } from '@services';
@@ -33,10 +32,14 @@ export class RosterDetailsPage implements OnInit {
 
   /**
    * RosterDetailsPage Constructor
+   *
+   * @param activatedRoute
+   * @param navController
+   * @param rosterService
    */
   constructor(
     private activatedRoute: ActivatedRoute,
-    private loadingController: LoadingController,
+    private navController: NavController,
     public rosterService: RosterService,
   ) {}
 
@@ -50,15 +53,18 @@ export class RosterDetailsPage implements OnInit {
    */
   async ionViewDidEnter() {
 
-    this.loader = await this.loadingController.create({
-      message: 'Loading Roster...',
-    });
+    this.roster = this.rosterService.get(this.activatedRoute.snapshot.params.id);
 
-    this.loader.present();
+  }
 
-    this.roster = this.rosterService.get(this.activatedRoute.snapshot.params.id).pipe(
-      tap(() => this.loader.dismiss())
-    );
+  /**
+   * Navigates to selected force
+   *
+   * @param force
+   */
+  public goToForce(force: RosterForceInterface): void {
+
+    this.navController.navigateForward(['tab1', 'force'], { state: { force } });
 
   }
 }

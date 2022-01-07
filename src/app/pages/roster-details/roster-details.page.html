@@ -1,8 +1,8 @@
 <ion-header>
 
-  <ion-toolbar [color]="'secondary'">
+  <ion-toolbar [color]="'primary'">
 
-    <ion-buttons slot="start">
+    <ion-buttons [slot]="'start'">
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
@@ -10,8 +10,10 @@
 
       <ion-title>{{ roster.name }}</ion-title>
 
-      <ion-buttons slot="end">
-        <ion-button (click)="this.rosterService.showDeleteConfirmation(roster.id, true)"><ion-icon [icon]="'md-trash'"></ion-icon></ion-button>
+      <ion-buttons [slot]="'end'">
+        <ion-button (click)="this.rosterService.showDeleteConfirmation(roster.id, true)">
+          <ion-icon [icon]="'md-trash'"></ion-icon>
+        </ion-button>
       </ion-buttons>
 
     </ng-container>
@@ -20,12 +22,42 @@
 
 </ion-header>
 
-<ion-content class="ion-padding">
+<ion-content>
 
-  <ng-container *ngIf="roster | async as roster;">
+  <ng-container *ngIf="roster | async as roster; else loadingRoster">
 
-    <p>{{ roster.name }}</p>
+    <div class="ion-padding">
+
+      <app-roster-header [roster]="roster"></app-roster-header>
+
+    </div>
+
+    <ion-list [lines]="'full'">
+
+      <ion-list-header>
+        <ion-label>Roster Forces</ion-label>
+      </ion-list-header>
+
+      <ion-item *ngFor="let force of roster.forces" [button]="true" [detail]="true" (click)="goToForce(force)">
+
+        <ion-label>
+
+          <ion-text><h2 class="ion-text-bold">{{ force.name }}</h2></ion-text>
+          <ion-text [color]="'primary'"><h4>{{ force.catalogueName }}</h4></ion-text>
+          <ion-text [color]="'medium'"><small>Revision: {{ force.catalogueRevision }}</small></ion-text>
+
+        </ion-label>
+
+      </ion-item>
+
+    </ion-list>
 
   </ng-container>
 
 </ion-content>
+
+<ng-template #loadingRoster>
+
+  <app-loader></app-loader>
+
+</ng-template>

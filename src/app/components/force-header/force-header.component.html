@@ -1,0 +1,34 @@
+<ion-card [color]="'primary'" *ngIf="selectionsCosts">
+
+  <ion-card-header>
+
+    <ion-grid>
+
+      <ion-row>
+
+        <ion-col *ngFor="let cost of selectionsCosts" class="ion-text-center">
+
+          <ion-text><h4 class="ion-no-margin ion-text-bold">{{ cost.value | number }}</h4></ion-text>
+          <ion-text [color]="'light'"><small class="ion-no-margin">{{ cost.name }}</small></ion-text>
+
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+  </ion-card-header>
+
+</ion-card>
+
+<div class="ion-margin ion-text-center" *ngIf="force">
+
+  <ion-text>
+    <small class="ion-block ion-text-bold ion-text-uppercase">{{ force?.catalogueName }}</small>
+  </ion-text>
+
+  <ion-text [color]="'medium'">
+    <small class="ion-block ion-text-bold ion-text-uppercase">Revision: {{ force?.catalogueRevision }}</small>
+  </ion-text>
+
+</div>

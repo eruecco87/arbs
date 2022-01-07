@@ -7,8 +7,8 @@
     </ion-list-header>
 
     <ion-item-sliding *ngFor="let roster of list">
-      <ion-item [button]="true" [detail]="true" [routerLink]="roster.id">
-        <ion-label>{{ roster.name }}</ion-label>
+      <ion-item [button]="true" [detail]="true" [routerLink]="['roster', roster.id]">
+        <ion-label class="ion-text-bold">{{ roster.name }}</ion-label>
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option [color]="'danger'" (click)="rosterService.showDeleteConfirmation(roster.id)"><ion-icon [name]="'trash-outline'" ></ion-icon></ion-item-option>
@@ -20,10 +20,9 @@
 </ng-container>
 
 <ng-template #loadingRosters>
-  <div class="ion-text-center">
-    <ion-spinner name="crescent"></ion-spinner>
-    <ion-text><p>Loading rosters...</p></ion-text>
-  </div>
+
+  <app-loader></app-loader>
+
 </ng-template>
 
 <ng-template #noRosters>

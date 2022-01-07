@@ -17,7 +17,7 @@ export interface RosterInterface {
  */
 export interface RosterCostLimitInterface {
   name: string;
-  value: number;
+  value: string;
 }
 
 /**
@@ -25,7 +25,7 @@ export interface RosterCostLimitInterface {
  */
 export interface RosterCostInterface {
   name: string;
-  value: number;
+  value: string;
 }
 
 /**
@@ -34,6 +34,7 @@ export interface RosterCostInterface {
 export interface RosterForceInterface {
   name: string;
   catalogueName: string;
+  catalogueRevision: string;
   rules: RosterForceRuleInterface[];
   selections: RosterForceSelectionInterface[];
 }
@@ -80,7 +81,7 @@ export interface RosterForceSelectionInterface {
   name: string;
   type: string;
   category: RosterForceCategoryInterface[];
-  cost: RosterCostInterface[];
+  costs: RosterCostInterface[];
   rules: RosterForceRuleInterface[];
   selections: RosterForceSelectionInterface[];
   profiles: RosterForceProfileInterface[];

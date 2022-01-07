@@ -16,6 +16,7 @@
     "paths":{
       "@interfaces": ["src/app/interfaces/index.ts"],
       "@services": ["src/app/services/index.ts"],
+      "@pages": ["src/app/pages/index.ts"],
       "@components": ["src/app/components/index.ts"],
       "stream": ["./node_modules/stream-browserify"],
       "timers": ["./node_modules/timers-browserify"]
