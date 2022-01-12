@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 // Interfaces
-import { RosterCostInterface, RosterForceSelectionInterface } from '@interfaces';
+import { RosterCostInterface, RosterForceSelectionInterface, RosterForceCategoryInterface } from '@interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,40 @@ export class SelectionService {
   constructor() { }
 
   /**
-   * Calculates the total cost of a force base on the selection's individual costs .
+   * Compiles a list of primary categories and their children selections from a selections array.
+   *
+   * @param selections
+   */
+  public getSelectionsByPrimaryCategory(selections: RosterForceSelectionInterface[]): RosterForceCategoryInterface[] {
+
+    const CATEGORIES: RosterForceCategoryInterface[] = [];
+
+    selections.forEach((selection: RosterForceSelectionInterface) => {
+
+      selection.categories.forEach((category: RosterForceCategoryInterface) => {
+
+        const CATEGORY_INDEX: number = CATEGORIES.findIndex((c: RosterForceCategoryInterface) => c.name === category.name);
+
+        if (CATEGORY_INDEX === -1 && category.primary) {
+
+          CATEGORIES.push(Object.assign({}, category, { selections: [selection] }));
+
+        } else if (CATEGORY_INDEX > -1) {
+
+          CATEGORIES[CATEGORY_INDEX].selections.push(selection);
+
+        }
+
+      });
+
+    });
+
+    return CATEGORIES;
+
+  }
+
+  /**
+   * Calculates the total cost of a force based on the selection's individual costs .
    *
    * @param selections
    * @param costs
@@ -22,28 +55,28 @@ export class SelectionService {
   public getCosts(selections: RosterForceSelectionInterface[], costs?: RosterCostInterface[]): RosterCostInterface[] {
 
     // Initialize the total costs array
-    const TOTAL: RosterCostInterface[] = costs && costs.length ? costs : [];
+    let total: RosterCostInterface[] = costs && costs.length ? [...costs] : [];
 
     // Loop through the selections
-    selections.forEach((selection: RosterForceSelectionInterface) => {
+    [...selections].forEach((selection: RosterForceSelectionInterface) => {
 
       // Loop through the costs
       selection.costs.forEach((cost: RosterCostInterface) => {
 
-        this.addCosts(cost, TOTAL);
+        total = this.addCosts(cost, total);
 
       });
 
       // If the selection has a sub-selection, add the costs of the sub-selection
       if (selection.selections && selection.selections.length) {
 
-        this.getCosts(selection.selections, TOTAL);
+        total = this.getCosts(selection.selections, total);
 
       }
 
     });
 
-    return TOTAL;
+    return total;
 
   }
 
@@ -53,18 +86,19 @@ export class SelectionService {
    * @param cost
    * @param currentTotal
    */
-  private addCosts(cost: RosterCostInterface, currentTotal: RosterCostInterface[]) {
+  private addCosts(cost: RosterCostInterface, currentTotal: RosterCostInterface[]): RosterCostInterface[] {
 
     // Find an existing cost with the same name
-    const COST_EXIST = currentTotal.find((c: RosterCostInterface) => c.name === cost.name);
+    const COST_EXIST = currentTotal.findIndex((c: RosterCostInterface) => c.name === cost.name);
 
-    if (!COST_EXIST) {
+    if (COST_EXIST === -1) {
 
-      currentTotal.push(cost);
+      return [...currentTotal, cost];
 
     } else {
 
-      COST_EXIST.value = (parseFloat(COST_EXIST.value) + parseFloat(cost.value)).toString();
+      currentTotal[COST_EXIST].value = (parseFloat(currentTotal[COST_EXIST].value) + parseFloat(cost.value)).toString();
+      return [...currentTotal];
 
     }
 

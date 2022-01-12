@@ -6,7 +6,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-title>{{ force?.name }}</ion-title>
+    <ion-title>{{ getImmutableForce()?.name }}</ion-title>
 
   </ion-toolbar>
 
@@ -14,9 +14,36 @@
 
 <ion-content>
 
-  <ng-container *ngIf="force; else loadingForce">
+  <ng-container *ngIf="getImmutableForce(); else loadingForce">
 
-    <app-force-header [force]="force"></app-force-header>
+    <app-force-header [force]="getImmutableForce()"></app-force-header>
+
+    <ion-list *ngIf="getImmutableForce().selections && getImmutableForce().selections.length" [lines]="'full'">
+
+      <ion-list-header>
+        <ion-label>Selections</ion-label>
+      </ion-list-header>
+
+      <ng-container *ngFor="let category of categories">
+
+        <ion-item-divider [color]="'light'"><ion-label>{{ category.name }}</ion-label></ion-item-divider>
+
+        <ion-item [button]="true" [detail]="true" *ngFor="let selection of category.selections">
+
+          <ion-label>
+
+            <ion-text><h2 class="ion-text-bold">{{ selection.name }}</h2></ion-text>
+            <ion-text [color]="'primary'">
+              <small *ngFor="let cost of selection.costs let last = last;"><strong>{{ cost.name }}</strong> {{ cost.value | number }} <span *ngIf="!last">| </span></small>
+            </ion-text>
+
+          </ion-label>
+
+        </ion-item>
+
+      </ng-container>
+
+    </ion-list>
 
   </ng-container>
 

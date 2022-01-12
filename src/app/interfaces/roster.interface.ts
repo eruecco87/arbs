@@ -45,6 +45,20 @@ export interface RosterForceInterface {
 export interface RosterForceCategoryInterface {
   name: string;
   primary: boolean;
+
+  /**
+   * This property is not part of the originally parsed roster, this is being
+   * populated by the SelectionService.getPrimaryCategories() method as a convenience
+   * to have all the related selections available in one place when getting the primary categories.
+   */
+  costs?: RosterCostInterface[];
+
+  /**
+   * This property is not part of the originally parsed roster, this is being
+   * populated by the SelectionService.getPrimaryCategories() method as a convenience
+   * to have all the related selections available in one place when getting the primary categories.
+   */
+  selections?: RosterForceSelectionInterface[];
 }
 
 /**
@@ -80,7 +94,7 @@ export interface RosterForceProfileCharacteristicInterface {
 export interface RosterForceSelectionInterface {
   name: string;
   type: string;
-  category: RosterForceCategoryInterface[];
+  categories: RosterForceCategoryInterface[];
   costs: RosterCostInterface[];
   rules: RosterForceRuleInterface[];
   selections: RosterForceSelectionInterface[];

@@ -87,7 +87,7 @@ export class BattlescribeParserService {
     return rules.map((rule: any) => ({
       name: rule.NAME,
       description: rule.DESCRIPTION,
-      hidden: rule.NAMEN
+      hidden: rule.HIDDEN === 'true'
     }));
 
   }
@@ -99,7 +99,7 @@ export class BattlescribeParserService {
 
     return categories.map((category: any) => ({
       name: category.NAME,
-      primary: category.PRIMARY
+      primary: category.PRIMARY === 'true',
     }));
 
   }
@@ -111,7 +111,7 @@ export class BattlescribeParserService {
 
     return profiles.map((profile: any) => ({
       name: profile.NAME,
-      hidden: profile.HIDDEN,
+      hidden: profile.HIDDEN === 'true',
       typeName: profile.TYPENAME,
       characteristics: profile.CHARACTERISTICS ? this.mapForcesProfileCharacteristics(profile.CHARACTERISTICS[0].CHARACTERISTIC) : [],
     }));

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 // Interfaces
 import { RosterForceInterface, RosterCostInterface } from '@interfaces';
@@ -11,7 +11,7 @@ import { SelectionService } from '@services';
   templateUrl: './force-header.component.html',
   styleUrls: ['./force-header.component.scss'],
 })
-export class ForceHeaderComponent implements OnChanges {
+export class ForceHeaderComponent implements OnInit {
 
   /**
    * Holds the data for the roster's force.
@@ -29,19 +29,15 @@ export class ForceHeaderComponent implements OnChanges {
    * @param selectionService
    */
   constructor(
-    public selectionService: SelectionService
+    private selectionService: SelectionService
   ) {}
 
   /**
-   * OnChanges LifeCycle Hook.
+   * OnInit LifeCycle Hook.
    */
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnInit() {
 
-    if (changes && changes.force.currentValue) {
-
-      this.selectionsCosts = this.selectionService.getCosts(changes.force.currentValue.selections);
-
-    }
+    this.selectionsCosts = this.selectionService.getCosts(this.force.selections);
 
   }
 }
