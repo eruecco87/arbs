@@ -32,7 +32,10 @@ export class RosterForcePage {
    */
   ionViewDidEnter() {
 
-    this.categories = this.getCategoriesWithSelectionsAndCosts();
+    this.categories = window.history.state && window.history.state.force?
+      this.getCategoriesWithSelectionsAndCosts()
+        .filter((category: RosterForceCategoryInterface) => category.name !== 'Configuration') :
+      [];
 
   }
 
@@ -68,19 +71,13 @@ export class RosterForcePage {
    */
   public getCategoriesWithSelectionsAndCosts(): RosterForceCategoryInterface[] {
 
-    return this.getCategoriesWithSelections().map(category => {
-
-      category.selections = category.selections.map(selection => {
-
-        selection.costs = this.selectionService.getCosts([selection]);
-
-        return selection;
-
-      });
-
-      return category;
-
-    });
+    return this.getCategoriesWithSelections().map(category => ({
+      ...category,
+      selections: category.selections.map(selection => ({
+        ...selection,
+        costs: this.selectionService.getCosts([selection])
+      }))
+    }));
 
   }
 }

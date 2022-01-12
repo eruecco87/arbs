@@ -33,8 +33,8 @@
           <ion-label>
 
             <ion-text><h2 class="ion-text-bold">{{ selection.name }}</h2></ion-text>
-            <ion-text [color]="'primary'">
-              <small *ngFor="let cost of selection.costs let last = last;"><strong>{{ cost.name }}</strong> {{ cost.value | number }} <span *ngIf="!last">| </span></small>
+            <ion-text [color]="'medium'">
+              <small *ngFor="let cost of selection.costs let last = last;"><strong>{{ cost.name }}</strong> {{ cost.value | number }} <span *ngIf="!last">- </span></small>
             </ion-text>
 
           </ion-label>
